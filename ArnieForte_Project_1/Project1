@@ -1,0 +1,62 @@
+/*var zoom = 1.00
+
+function setup(){
+  createCanvas(1000,800);
+  background(112, 143, 110);
+  
+}
+
+function draw(){
+ if (zoom <= 5){
+	push();
+	scale(zoom);
+	fill(135, 80, 70);
+  rect(325, 275, 350, 250, 20);
+  fill(150);
+  rect(350, 300, 300, 200, 10);
+	zoom += 2
+	pop();
+ }
+}
+
+function mousePressed(){
+
+}*/
+var zoom = 1.00;
+var zMin = 0.05;
+var zMax = 9.00;
+var sensativity = 0.005;
+
+function setup() {
+  createCanvas(1000,800);
+  rectMode(CENTER);
+}
+function draw() {
+  background(237, 34, 93);
+  translate(width/2,height/2);
+  fill(0);
+  scale(zoom);
+	fill(135, 80, 70);
+  rect(0, 0, 200, 150, 20);
+  fill(150);
+  rect(0, 0, 150, 100, 10);
+}
+ 
+function mouseWheel() {
+  if (zoom < 4.00){
+	zoom += sensativity * event.delta;
+  zoom = constrain(zoom, zMin, zMax);
+  //uncomment to block page scrolling
+  return false;
+	}
+	if (zoom >= 4.00){
+	background(112, 143, 110);
+	fill(135, 80, 70);
+  rect(0, 0, 200, 150, 20);
+  fill(150);
+  rect(0, 0, 150, 100, 10);
+	circle(random(10), 0,1);	
+
+	}
+	
+}
