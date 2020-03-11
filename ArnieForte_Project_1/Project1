@@ -38,8 +38,6 @@ function draw() {
   
   noStroke();
   static(true);//enable static function to add static effect to screen. 
-  
-  
 }
  
 function mouseWheel() {//if the mousewheel is used, zoom is schanged to affect the scale of the scene.
@@ -85,19 +83,6 @@ function powerOn(){
   circle(75, 60, 10);
 }
 function mousePressed(){
+  console.log("mouse pressed");
   setTimeout(powerOn, 2000);
 }
-/*function button(x,y){//button is pressed to move screen to next sequence
-  circle(x, y, 10);
-    this.x = x;
-    this.y = y;
-    this.col = color(0); 
-  
-  this.clicked = function() {
-    var d = dist(mouseX, mouseY, this.x, this.y);
-    if (d < 5){
-      this.col = color(255);
-    }
-  }
-  }
-*/
