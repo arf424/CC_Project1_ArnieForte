@@ -3,7 +3,10 @@
 //screen black, logo pops up and starts to bounce around, changes colors everytime it changes direction,
 //logo never touches corners.
 
+var power = false;
 
+var xspeed = 3
+var yspeed = 3
 
 var zoom = 1.00;
 var zMin = 0.05;
@@ -15,7 +18,7 @@ function setup() {
   rectMode(CENTER);//set the rectangles to be created from the center out.
 }
 function draw() {
-  
+  if (power == false){
   background(117, 138, 94);
   translate(width/2,height/2);
   fill(0);
@@ -25,7 +28,7 @@ function draw() {
   fill(135, 80, 70);
   rect(0, 0, 200, 150, 20);
   fill(150);
-  rect(0, 0, 150, 100, 10);
+  rect(0, 0, 150, 100);
   fill(94, 106, 138);
   rect(0, 195, 280, -220);
   fill(0);
@@ -37,7 +40,12 @@ function draw() {
 
   
   noStroke();
-  static(true);//enable static function to add static effect to screen. 
+  static();//enable static function to add static effect to screen.
+  }
+  if (power == true){
+  powerOn();
+}
+  
 }
  
 function mouseWheel() {//if the mousewheel is used, zoom is schanged to affect the scale of the scene.
@@ -55,7 +63,8 @@ function mouseWheel() {//if the mousewheel is used, zoom is schanged to affect t
     }
 }
 function static() {//static function for starting sequence
-    for (var x = 0; x <= 145; x +=5) {
+ if (power == false){   
+  for (var x = 0; x <= 145; x +=5) {//noprotect
       for (var y = 0; y <= 90; y+=5) {
         fill(0);
         circle(x-random(5)-70, y-random(5)-42.5, 3);
@@ -63,16 +72,20 @@ function static() {//static function for starting sequence
         circle(x-random(5)-70, y-random(5)-42.5, 3);
       }
     }
+ }
 }
 
 function powerOn(){
-  static(false);
+  power = true;
+  translate(width/2,height/2);
+  fill(0);
+  scale(zoom);
   background(117, 138, 94);
   stroke(1);
   fill(135, 80, 70);
   rect(0, 0, 200, 150, 20);
   fill(0);
-  rect(0, 0, 150, 100, 10);
+  rect(0, 0, 150, 100);
   fill(94, 106, 138);
   rect(0, 195, 280, -220);
   fill(0);
@@ -81,8 +94,36 @@ function powerOn(){
   line(0, -75, -75, -180);
   line(0, -75, 75, -180);
   circle(75, 60, 10);
+  
+  var a = 0;
+  var b = 0;
+  fill(255);
+  stroke(1);
+  circle(a,b, 20);
+
+  if ((a > 64.9) || (a < -65)){
+    xspeed = -3;
+  }
+  if((b > 38) || (b < - 38)){
+    yspeed = -3;
+  }
+  
+  a = a + xspeed;
+  b = b + yspeed;
+  
+/*  for (var x = -65; x <= 64.9; x +=5.1) {//noprotect
+      for (var y = -38; y <= 38; y+=5) {
+        fill(255);
+        noStroke();
+        circle(x+random(1),y+random(1),20);
+      }
+  }*/
 }
 function mousePressed(){
   console.log("mouse pressed");
+  if (power == false);{
   setTimeout(powerOn, 2000);
+  }
+
 }
+
