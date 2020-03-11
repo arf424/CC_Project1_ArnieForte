@@ -1,62 +1,66 @@
-/*var zoom = 1.00
-
-function setup(){
-  createCanvas(1000,800);
-  background(112, 143, 110);
-  
-}
-
-function draw(){
- if (zoom <= 5){
-	push();
-	scale(zoom);
-	fill(135, 80, 70);
-  rect(325, 275, 350, 250, 20);
-  fill(150);
-  rect(350, 300, 300, 200, 10);
-	zoom += 2
-	pop();
- }
-}
-
-function mousePressed(){
-
-}*/
+//To Do:
+//Click button to start next sequence
+//screen black, logo pops up and starts to bounce around, changes colors everytime it changes direction,
+//logo never touches corners.
 var zoom = 1.00;
 var zMin = 0.05;
 var zMax = 9.00;
-var sensativity = 0.005;
+var sensativity = 0.005;//variables to control parameters of mousewheel function
 
 function setup() {
-  createCanvas(1000,800);
-  rectMode(CENTER);
+  createCanvas(1000,650);
+  rectMode(CENTER);//set the rectangles to be created from the center out.
 }
 function draw() {
-  background(237, 34, 93);
+  
+  background(117, 138, 94);
   translate(width/2,height/2);
   fill(0);
-  scale(zoom);
-	fill(135, 80, 70);
+  scale(zoom);//set up the scene and zoom.
+  
+  stroke(1);
+  fill(135, 80, 70);
   rect(0, 0, 200, 150, 20);
   fill(150);
   rect(0, 0, 150, 100, 10);
+  fill(94, 106, 138);
+  rect(0, 195, 280, -220);
+  fill(0);
+  rect(-75, 80, 10,10);
+  rect(75, 80, 10,10);
+  line(0, -75, -75, -180);
+  line(0, -75, 75, -180);
+  circle(75, 60, 10);//create the tv and block it stands on
+  
+  noStroke();
+  static(true);//enable static function to add static effect to screen. 
 }
  
-function mouseWheel() {
+function mouseWheel() {//if the mousewheel is used, zoom is schanged to affect the scale of the scene.
   if (zoom < 4.00){
-	zoom += sensativity * event.delta;
+  zoom += sensativity * event.delta;
   zoom = constrain(zoom, zMin, zMax);
-  //uncomment to block page scrolling
   return false;
-	}
-	if (zoom >= 4.00){
-	background(112, 143, 110);
-	fill(135, 80, 70);
+  }
+  if (zoom >= 4.00){
+  background(117, 138, 94);
+  fill(135, 80, 70);
   rect(0, 0, 200, 150, 20);
   fill(150);
-  rect(0, 0, 150, 100, 10);
-	circle(random(10), 0,1);	
-
-	}
-	
+  rect(0, 0, 150, 100, 10);//stop the zoom once it gets to a certain threshold.
+    }
+  
+}
+function static() {//static function for starting sequence
+    for (var x = 0; x <= 145; x +=5) {
+      for (var y = 0; y <= 90; y+=5) {
+        fill(0);
+        circle(x-random(5)-70, y-random(5)-42.5, 3);
+        fill(255);
+        circle(x-random(5)-70, y-random(5)-42.5, 3);
+      }
+    }
+}
+function buttonClick(){//button is pressed to move screen to next sequence
+  
 }
